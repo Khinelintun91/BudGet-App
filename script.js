@@ -11,24 +11,20 @@ const balanceValue = document.getElementById("balance-amount");
 const list = document.getElementById("list");
 let tempAmount = 0;
 
-// Set budget part
-totalAmountButton.addEventListener("click", () => {
-    tempAmount = parseInt(totalAmount.value); // Ensure the value is treated as an integer
-    // Empty or negative input
-    if (isNaN(tempAmount) || tempAmount <= 0) {
-        errorMessage.classList.remove("hide");
-    } else {
-        errorMessage.classList.add("hide");
-        // Set Budget
+window.onload = function () {
+    if(localStorage.getItem("totalAmount")){
+        tempAmount = parseInt(localStorage.getItem("totalAmount"));
         amount.innerText = tempAmount;
-        // Set Balance
-        balanceValue.innerText = tempAmount - parseInt(expenditureValue.innerText);
-        // Clear Input Box
-        totalAmount.value = "";
+        balanceValue.innerText = localStorage.getItem("balance");
+        expenditureValue.innerText = localStorage.getItem("expenditure");
     }
-});
 
-// Function to disable edit and delete buttons
+    if(localStorage.getItem("expenseList")){
+        list.innerHTML = localStorage.getItem("expenseList");
+        reattachEventListeners();
+    }
+};
+
 const disableButtons = (bool) => {
     const editButtons = document.getElementsByClassName("edit");
     Array.from(editButtons).forEach((element) => {
@@ -36,14 +32,33 @@ const disableButtons = (bool) => {
     });
 };
 
-// Function to modify list elements
+const saveToLocalStorage = () => {
+    localStorage.setItem("totalAmount", tempAmount);
+    localStorage.setItem("balance", balanceValue.innerText);
+    localStorage.setItem("expenditure", expenditureValue.innerText);
+    localStorage.setItem("expenseList", list.innerHTML);
+};
+
+totalAmountButton.addEventListener("click", () => {
+    tempAmount = parseInt(totalAmount.value);
+    if(isNaN(tempAmount) || tempAmount <= 0){
+        errorMessage.classList.remove("hide");
+    } else{
+        errorMessage.classList.add("hide");
+        amount.innerText = tempAmount;
+        balanceValue.innerText = tempAmount - parseInt(expenditureValue.innerText);
+        totalAmount.value = "";
+        saveToLocalStorage();
+    }
+});
+
 const modifyList = (element, edit = false) => {
     let parentDiv = element.parentElement;
     let currentBalance = parseInt(balanceValue.innerText);
     let currentExpenditure = parseInt(expenditureValue.innerText);
     let parentAmount = parseInt(parentDiv.querySelector(".amount").innerText);
 
-    if (edit) {
+    if(edit){
         let parentText = parentDiv.querySelector(".product").innerText;
         productTitle.value = parentText;
         userAmount.value = parentAmount;
@@ -53,9 +68,9 @@ const modifyList = (element, edit = false) => {
     balanceValue.innerText = currentBalance + parentAmount;
     expenditureValue.innerText = currentExpenditure - parentAmount;
     parentDiv.remove();
+    saveToLocalStorage();
 };
 
-// Function to create list
 const listCreater = (expenseName, expenseValue) => {
     let sublistContent = document.createElement("div");
     sublistContent.classList.add("sublist-content", "flex-space");
@@ -78,36 +93,45 @@ const listCreater = (expenseName, expenseValue) => {
     sublistContent.appendChild(editButton);
     sublistContent.appendChild(deleteButton);
     list.appendChild(sublistContent);
+    saveToLocalStorage();
 };
 
-// Function to add expense
+const reattachEventListeners = () => {
+    const editButtons = document.getElementsByClassName("edit");
+    Array.from(editButtons).forEach((editButton, index) => {
+        editButton.addEventListener("click", () => {
+            modifyList(editButton.parentElement, true);
+        });
+    });
+
+    const deleteButtons = document.getElementsByClassName("delete");
+    Array.from(deleteButtons).forEach((deleteButton) => {
+        deleteButton.addEventListener("click", () => {
+            modifyList(deleteButton);
+        });
+    });
+};
+
 checkAmountButton.addEventListener("click", () => {
-    // Empty checks
-    if (!userAmount.value || !productTitle.value) {
+    if(!userAmount.value || !productTitle.value){
         productTitleError.classList.remove("hide");
         return false;
     }
 
     productTitleError.classList.add("hide");
-    
-    // Enable buttons
+
     disableButtons(false);
-    
-    // Expense
+
     let expenditure = parseInt(userAmount.value);
-    
-    // Total expense (existing + new)
+
     let sum = parseInt(expenditureValue.innerText) + expenditure;
     expenditureValue.innerText = sum;
-    
-    // Total balance (budget - total expense)
+
     const totalBalance = tempAmount - sum;
     balanceValue.innerText = totalBalance;
-    
-    // Create list
+
     listCreater(productTitle.value, userAmount.value);
-    
-    // Empty inputs
+
     productTitle.value = "";
     userAmount.value = "";
 });
