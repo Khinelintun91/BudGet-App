@@ -74,7 +74,22 @@ const modifyList = (element, edit = false) => {
 const listCreater = (expenseName, expenseValue) => {
     let sublistContent = document.createElement("div");
     sublistContent.classList.add("sublist-content", "flex-space");
+<<<<<<< HEAD
     sublistContent.innerHTML = `<p class="product">${expenseName}</p><p class="amount">${expenseValue}</p>`;
+=======
+    
+    // Create columns
+    let nameCol = document.createElement("div");
+    nameCol.classList.add("col-name");
+    nameCol.innerText = expenseName;
+
+    let amountCol = document.createElement("div");
+    amountCol.classList.add("col-amount");
+    amountCol.innerText = expenseValue;
+
+    let actionsCol = document.createElement("div");
+    actionsCol.classList.add("col-actions");
+>>>>>>> 1273d58 (Align expense list columns and add Delete All button)
 
     let editButton = document.createElement("button");
     editButton.classList.add("fa", "fa-pen-to-square", "edit");
@@ -90,8 +105,17 @@ const listCreater = (expenseName, expenseValue) => {
         modifyList(deleteButton);
     });
 
+<<<<<<< HEAD
     sublistContent.appendChild(editButton);
     sublistContent.appendChild(deleteButton);
+=======
+    actionsCol.appendChild(editButton);
+    actionsCol.appendChild(deleteButton);
+
+    sublistContent.appendChild(nameCol);
+    sublistContent.appendChild(amountCol);
+    sublistContent.appendChild(actionsCol);
+>>>>>>> 1273d58 (Align expense list columns and add Delete All button)
     list.appendChild(sublistContent);
     saveToLocalStorage();
 };
@@ -135,3 +159,20 @@ checkAmountButton.addEventListener("click", () => {
     productTitle.value = "";
     userAmount.value = "";
 });
+<<<<<<< HEAD
+=======
+
+// Delete All functionality
+const deleteAllButton = document.getElementById("delete-all");
+deleteAllButton.addEventListener("click", () => {
+    // Clear the list
+    list.innerHTML = "";
+    
+    // Reset expenditure and balance
+    expenditureValue.innerText = "0";
+    balanceValue.innerText = tempAmount;
+    
+    // Save to localStorage
+    saveToLocalStorage();
+});
+>>>>>>> 1273d58 (Align expense list columns and add Delete All button)
