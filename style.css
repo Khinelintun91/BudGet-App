@@ -97,8 +97,6 @@ body {
     border-left: 0.3em solid #587ef4;
     margin-bottom: 0.6em;
     padding: 0.5em 0;
-<<<<<<< HEAD
-=======
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -120,7 +118,6 @@ body {
     justify-content: flex-end;
     gap: 0.5em;
     margin-right: 1.5em;
->>>>>>> 1273d58 (Align expense list columns and add Delete All button)
 }
 .product {
     font-weight: 500;
@@ -153,8 +150,6 @@ body {
     border: none;
     color: #587ef4;
 }
-<<<<<<< HEAD
-=======
 .delete-all {
     background-color: #ff465a;
     margin-bottom: 1em;
@@ -162,7 +157,6 @@ body {
 .delete-all:hover {
     background-color: #e63e51;
 }
->>>>>>> 1273d58 (Align expense list columns and add Delete All button)
 @media screen and (max-width: 600px) {
     .wrapper {
         font-size: 14px;
