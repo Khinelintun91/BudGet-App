@@ -56,10 +56,10 @@ const modifyList = (element, edit = false) => {
     let parentDiv = element.parentElement;
     let currentBalance = parseInt(balanceValue.innerText);
     let currentExpenditure = parseInt(expenditureValue.innerText);
-    let parentAmount = parseInt(parentDiv.querySelector(".amount").innerText);
+    let parentAmount = parseInt(parentDiv.querySelector(".amount") ? parentDiv.querySelector(".amount").innerText : parentDiv.querySelector(".col-amount").innerText);
 
     if(edit){
-        let parentText = parentDiv.querySelector(".product").innerText;
+        let parentText = parentDiv.querySelector(".product") ? parentDiv.querySelector(".product").innerText : parentDiv.querySelector(".col-name").innerText;
         productTitle.value = parentText;
         userAmount.value = parentAmount;
         disableButtons(true);
@@ -67,8 +67,11 @@ const modifyList = (element, edit = false) => {
 
     balanceValue.innerText = currentBalance + parentAmount;
     expenditureValue.innerText = currentExpenditure - parentAmount;
-    parentDiv.remove();
-    saveToLocalStorage();
+    parentDiv.classList.add("fade-out");
+    setTimeout(() => {
+        parentDiv.remove();
+        saveToLocalStorage();
+    }, 300);
 };
 
 const listCreater = (expenseName, expenseValue) => {
@@ -153,14 +156,13 @@ checkAmountButton.addEventListener("click", () => {
 
 // Delete All functionality
 const deleteAllButton = document.getElementById("delete-all");
-deleteAllButton.addEventListener("click", () => {
+
+deleteAllButton.addEventListener("click", function handleDeleteAll() {
     // Clear the list
     list.innerHTML = "";
-    
     // Reset expenditure and balance
     expenditureValue.innerText = "0";
     balanceValue.innerText = tempAmount;
-    
     // Save to localStorage
     saveToLocalStorage();
 });

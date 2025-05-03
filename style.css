@@ -5,13 +5,17 @@
     font-family: "Poppins", sans-serif;
 }
 body {
-    background-color: #f7f9fd;
+    background: linear-gradient(135deg, #f7f9fd 0%, #e3e9f7 100%);
 }
 .wrapper {
     width: 90%;
     font-size: 16px;
     max-width: 43.75em;
-    margin: 1em auto;
+    margin: 2em auto;
+    border-radius: 1em;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+    background: #fff;
+    padding: 2em 1em;
 }
 .container {
     width: 100%;
@@ -33,90 +37,138 @@ body {
 }
 .wrapper h3 {
     color: #363d55;
-    font-weight: 500;
+    font-weight: 600;
     margin-bottom: 0.6em;
+    letter-spacing: 1px;
 }
 .container input {
     display: block;
     width: 100%;
-    padding: 0.6em 0.3em;
-    border: 1px solid #d0d0dd;
-    border-radius: 0.3em;
+    padding: 0.7em 0.5em;
+    border: 1.5px solid #d0d0dd;
+    border-radius: 0.5em;
     color: #414a67;
     outline: none;
     font-weight: 400;
-    margin-bottom: 0.6em;
+    margin-bottom: 0.8em;
+    background: #f7f9fd;
+    transition: border 0.2s, box-shadow 0.2s;
 }
 .container input:focus {
     border-color: #587ef4;
+    box-shadow: 0 0 0 2px #587ef433;
 }
 .total-amount-container,
 .user-amount-container {
-    background-color: #ffffff;
-    padding: 1.25em 0.9em;
-    border-radius: 0.3em;
-    box-shadow: 0 0.6em 1.2em rgb(28, 0, 80, 0.06);
+    background-color: #f8faff;
+    padding: 1.5em 1.2em;
+    border-radius: 0.6em;
+    box-shadow: 0 2px 8px rgba(88, 126, 244, 0.08);
+    transition: box-shadow 0.2s;
+}
+.total-amount-container:hover,
+.user-amount-container:hover {
+    box-shadow: 0 4px 16px rgba(88, 126, 244, 0.15);
 }
 .output-container {
-    background-color: #587ef4;
+    background: linear-gradient(90deg, #587ef4 60%, #6a9cf7 100%);
     color: #ffffff;
-    border-radius: 0.3em;
-    box-shadow: 0 0.6em 1.2em rgb(28, 0, 80, 0.06);
+    border-radius: 0.5em;
+    box-shadow: 0 2px 8px rgba(88, 126, 244, 0.10);
     margin: 2em 0;
-    padding: 1.2em;
+    padding: 1.5em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.output-container div {
+    flex: 1;
+    text-align: center;
 }
 .output-container p {
-    font-weight: 500;
+    font-weight: 600;
     margin-bottom: 0.6em;
+    letter-spacing: 0.5px;
 }
 .output-container span {
     display: block;
     text-align: center;
-    font-weight: 400;
+    font-weight: 500;
     color: #e5e5e5;
+    font-size: 1.2em;
 }
 .submit {
     font-size: 1em;
     margin-top: 0.8em;
-    background-color: #587ef4;
+    background: linear-gradient(90deg, #587ef4 60%, #6a9cf7 100%);
     border: none;
     outline: none;
     color: #ffffff;
-    padding: 0.6em 1.2em;
-    border-radius: 0.3em;
+    padding: 0.7em 1.5em;
+    border-radius: 0.4em;
     cursor: pointer;
+    font-weight: 500;
+    box-shadow: 0 2px 8px rgba(88, 126, 244, 0.10);
+    transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
+    letter-spacing: 0.5px;
+}
+.submit:hover, .submit:focus {
+    background: linear-gradient(90deg, #4666c9 60%, #5b8be0 100%);
+    transform: translateY(-2px) scale(1.04);
+    box-shadow: 0 4px 16px rgba(88, 126, 244, 0.18);
+}
+.submit:active {
+    transform: scale(0.97);
 }
 .list {
-    background-color: #ffffff;
-    padding: 1.8em 1.2em;
-    box-shadow: 0 0.6em 1.2em rgb(28, 0, 80, 0.06);
-    border-radius: 0.6em;
+    background-color: #f8faff;
+    padding: 2em 1.5em;
+    box-shadow: 0 2px 8px rgba(88, 126, 244, 0.08);
+    border-radius: 0.8em;
+    margin-top: 2em;
 }
 .sublist-content {
     width: 100%;
     border-left: 0.3em solid #587ef4;
-    margin-bottom: 0.6em;
-    padding: 0.5em 0;
+    margin-bottom: 0.8em;
+    padding: 0.7em 0;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    background: #fff;
+    border-radius: 0.5em;
+    box-shadow: 0 1px 4px rgba(88, 126, 244, 0.06);
+    opacity: 1;
+    animation: fadeIn 0.5s;
+    transition: box-shadow 0.2s, transform 0.2s, opacity 0.3s;
+}
+.sublist-content:hover {
+    box-shadow: 0 4px 16px rgba(88, 126, 244, 0.13);
+    transform: translateY(-2px) scale(1.01);
+}
+.sublist-content.fade-out {
+    opacity: 0;
+    transition: opacity 0.3s;
 }
 .col-name {
     flex: 2;
     font-weight: 500;
     color: #363d55;
     margin-left: 1.5em;
+    font-size: 1.05em;
+    letter-spacing: 0.2px;
 }
 .col-amount {
     flex: 1;
     color: #414a67;
     text-align: center;
+    font-size: 1.05em;
 }
 .col-actions {
     flex: 1;
     display: flex;
     justify-content: flex-end;
-    gap: 0.5em;
+    gap: 0.7em;
     margin-right: 1.5em;
 }
 .product {
@@ -146,22 +198,56 @@ body {
 .delete {
     background-color: transparent;
     cursor: pointer;
-    margin-right: 1.5em;
+    margin-right: 0.5em;
     border: none;
     color: #587ef4;
+    font-size: 1.2em;
+    transition: color 0.2s, transform 0.1s;
+}
+.edit:hover, .delete:hover {
+    color: #ff465a;
+    transform: scale(1.2) rotate(-10deg);
+}
+.edit:active, .delete:active {
+    transform: scale(0.95);
 }
 .delete-all {
-    background-color: #ff465a;
+    background: linear-gradient(90deg, #ff465a 60%, #ff7b7b 100%);
     margin-bottom: 1em;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 8px rgba(255, 70, 90, 0.10);
+    transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
 }
-.delete-all:hover {
-    background-color: #e63e51;
+.delete-all:hover, .delete-all:focus {
+    background: linear-gradient(90deg, #e63e51 60%, #ff5e5e 100%);
+    transform: translateY(-2px) scale(1.04);
+    box-shadow: 0 4px 16px rgba(255, 70, 90, 0.18);
+}
+.delete-all:active {
+    transform: scale(0.97);
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
 }
 @media screen and (max-width: 600px) {
     .wrapper {
         font-size: 14px;
+        padding: 1em 0.2em;
     }
     .sub-container {
         grid-template-columns: 1fr;
+    }
+    .output-container {
+        flex-direction: column;
+        gap: 1em;
+    }
+    .list {
+        padding: 1em 0.5em;
     }
 }
